@@ -1,6 +1,6 @@
 package ua.edu.ucu.collections.immutable;
 
-public class ImmutableLinkedList implements ImmutableList{
+public class ImmutableLinkedList implements ImmutableList {
     private int len;
     private Node start;
 
@@ -98,10 +98,10 @@ public class ImmutableLinkedList implements ImmutableList{
         }
         if (index == 0) {
             result.start = new Node(c[0], curNode);
-            Node curNode1 = result.start;
+            Node curNodeNew = result.start;
             for (int i = 1; i < c.length; i++) {
-                curNode1.next = new Node(c[i], curNode);
-                curNode1 = curNode1.next;
+                curNodeNew.next = new Node(c[i], curNode);
+                curNodeNew = curNodeNew.next;
             }
         }
         else {
