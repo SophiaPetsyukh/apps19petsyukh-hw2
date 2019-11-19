@@ -1,6 +1,6 @@
 package ua.edu.ucu.collections.immutable;
 
-public class ImmutableLinkedList implements ImmutableList {
+public final class ImmutableLinkedList implements ImmutableList {
     private int len;
     private Node start;
 
@@ -8,14 +8,14 @@ public class ImmutableLinkedList implements ImmutableList {
         private Object value;
         private Node next;
 
-        private Node(Object v) {
-            this.value = v;
-            next = null;
-        }
-
-        private Node(Object v, Node next) {
+        public Node(Object v, Node next) {
             this.value = v;
             this.next = next;
+        }
+
+        public Node(Object v) {
+            this.value = v;
+            this.next = null;
         }
     }
 
@@ -25,15 +25,15 @@ public class ImmutableLinkedList implements ImmutableList {
     }
 
     public ImmutableLinkedList(Object[] data) {
-        if (data.length != 0) {
-            start = new Node(data[0]);
-            Node cur = start;
-            for (int i = 1; i < data.length; i++) {
-                cur.next = new Node(data[i]);
-                cur = cur.next;
-            }
-        }
         len = data.length;
+        start = new Node(data[0]);
+        Node cur = start;
+        int i = 1;
+        while (i < len) {
+            cur.next = new Node(data[i]);
+            cur = cur.next;
+            i++;
+        }
     }
 
     private void check(int index) {
@@ -96,19 +96,28 @@ public class ImmutableLinkedList implements ImmutableList {
         if (isEmpty()) {
             return new ImmutableLinkedList(c);
         }
-        if (index == 0) {
+        else if (index == 0) {
             result.start = new Node(c[0], curNode);
             Node curNodeNew = result.start;
-            for (int i = 1; i < c.length; i++) {
+            int i = 1;
+            while (i < c.length) {
                 curNodeNew.next = new Node(c[i], curNode);
                 curNodeNew = curNodeNew.next;
+                i++;
             }
         }
         else {
-            curNode = findNode(index - 1);
-            for (int i = 0; i < c.length; i++) {
-                curNode.next = new Node(c[i], curNode.next);
+            check(index - 1);
+            int i = 0;
+            while (i < index - 1) {
                 curNode = curNode.next;
+                i++;
+            }
+            int j = 0;
+            while (j < c.length) {
+                curNode.next = new Node(c[j], curNode.next);
+                curNode = curNode.next;
+                j++;
             }
         }
         result.len = len + c.length;
@@ -149,7 +158,7 @@ public class ImmutableLinkedList implements ImmutableList {
         int i = 0;
         Node curNode = start;
         while (curNode != null) {
-            if (curNode.value == e) {
+            if (curNode.value.equals(e)) {
                 return i;
             }
             i++;

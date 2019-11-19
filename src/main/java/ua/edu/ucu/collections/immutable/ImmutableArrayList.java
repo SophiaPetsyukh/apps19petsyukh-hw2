@@ -23,22 +23,22 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList add(Object e) {
+    public ImmutableArrayList add(Object e) {
         return addAll(len, new Object[] {e});
     }
 
     @Override
-    public ImmutableList add(int index, Object e) {
+    public ImmutableArrayList add(int index, Object e) {
         return addAll(index, new Object[] {e});
     }
 
     @Override
-    public ImmutableList addAll(Object[] c) {
+    public ImmutableArrayList addAll(Object[] c) {
         return addAll(len, c);
     }
 
     @Override
-    public ImmutableList addAll(int index, Object[] c) {
+    public ImmutableArrayList addAll(int index, Object[] c) {
         check(index);
         Object[] result = new Object[len + c.length];
         System.arraycopy(elements, 0, result, 0, index);
@@ -55,7 +55,7 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList remove(int index) {
+    public ImmutableArrayList remove(int index) {
         check(index);
         Object[] result = new Object[len - 1];
         for (int i = 0; i < index; i++) {
@@ -68,7 +68,7 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList set(int index, Object e) {
+    public ImmutableArrayList set(int index, Object e) {
         check(index);
         Object[] result = Arrays.copyOf(elements, len);
         result[index] = e;
@@ -78,7 +78,7 @@ public class ImmutableArrayList implements ImmutableList {
     @Override
     public int indexOf(Object e) {
         for (int i = 0; i < len; i++) {
-            if (elements[i] == e) {
+            if (elements[i].equals(e)) {
                 return i;
             }
         }
@@ -91,7 +91,7 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList clear() {
+    public ImmutableArrayList clear() {
         return new ImmutableArrayList(new Object[] {}, 0);
     }
 

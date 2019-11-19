@@ -14,12 +14,7 @@ public class Queue {
     }
 
     public void enqueue(Object e) {
-        if (q.isEmpty()) {
-            q = q.addFirst(e);
-        }
-        else {
-            q = q.addLast(e);
-        }
+        q = q.addLast(e);
     }
 
     public Object dequeue() {
