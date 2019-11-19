@@ -21,14 +21,5 @@ public class StackTest {
             assertEquals(i, s.peek());
         }
     }
-
-    @Test
-    public void testPop() {
-        for (int i = 0; i < 5; i++) {
-            s.push(i);
-        }
-        s.pop();
-        assertEquals(1, s.peek());
-    }
     
 }
